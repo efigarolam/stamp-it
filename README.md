@@ -7,21 +7,29 @@ StampIt allows you to add watermarks to existing PDF files. In a very easy way. 
 
 1. Add the following line to your Rails application's Gemfile:
 
+  ````ruby
     gem 'stamp-it', require: 'stamp_it'
+  ````
+  
+1. Optionally, you can add the following gem to have access to the **pdftk** binaries.
 
-2. Optionally, you can add the following gem to have access to the **pdftk** binaries.
-
+  ````ruby
     gem 'pdftk-binary'
+  ````
 
 ## Usage
 
 1. First you will need to create the watermark template file:
 
+  ````ruby
     wm_template_path = StampIt::Watermark.create('/path/to/wm_template.pdf', 'Message to add as a Watermark.')
+  ````
 
 2. Add the watermark template as background to an existing PDF file:
 
+  ````ruby
     StampIt::Background.add('/path/to/existing.pdf', wm_template_path, '/path/to/watermarked.pdf')
+  ````
 
 3. That's it, you will generate a watermarked file.
 
