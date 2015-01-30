@@ -20,14 +20,8 @@ class StampIt
   private
 
   def find_pdftk_binary_path
-    possible_locations = (ENV['PATH'].split(':') + %w(/usr/bin /usr/local/bin ~/bin)).uniq
+    possible_locations = (%w(/usr/bin /usr/local/bin ~/bin) + ENV['PATH'].split(':')).uniq
     exe_path ||= config[:exe_path] unless config.empty?
-    exe_path ||= begin
-      (defined?(Bundler) ? `bundle exec which pdftk` : `which pdftk`).chomp
-    rescue
-      nil
-    end
-
     exe_path ||= possible_locations.map { |l| File.expand_path("#{l}/#{EXE_NAME}") }.find { |location| File.exist?(location) }
     exe_path || ''
   end
